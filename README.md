@@ -1,6 +1,12 @@
 # Considerations When Constructing Containers
 Optimizing for speed, size, and security
 
+## Docker Layers
+<TBW>
+
+## Dockerfile Evolution
+<TBW>
+
 ## Security
 
 ### Avoid secrets in Dockerfiles
