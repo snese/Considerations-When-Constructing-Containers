@@ -2,10 +2,10 @@
 Optimizing for speed, size, and security
 
 ## Docker Layers
-<TBW>
+<TODO>
 
 ## Dockerfile Evolution
-<TBW>
+<TODO>
 
 ## Security
 
