@@ -18,10 +18,33 @@ Optimizing for speed, size, and security
     
   #### Terminal
   ```zsh
-  $$: docker build --build-arg AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY_ID=$AWS_SECRET_ACCESS_KEY_ID
+  $: docker build --build-arg \
+    AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+    AWS_SECRET_ACCESS_KEY_ID=$AWS_SECRET_ACCESS_KEY_ID
   ...
   ```
 </details>
+
+<details>
+  <summary>Good example</summary>
+
+  #### Dockerfile
+  ```Dockerfile
+  FROM alpine:3.10
+  RUN ...
+  RUN pip install awscli
+  RUN --mount=type=secret,id=aws,target=/root/.aws/credentials \
+    && aws s3 sync s3://... 
+  ...
+  ```
+    
+  #### Terminal
+  ```zsh
+  $: docker build --secret id=aws,src=$HOME/.aws/credentials
+  ...
+  ```
+</details>
+
 ## Summary
 
 Small is beautiful - Faster builds and deploys
