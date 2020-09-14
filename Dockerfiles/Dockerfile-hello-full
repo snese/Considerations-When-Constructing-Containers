@@ -1,0 +1,10 @@
+FROM golang:alpine
+
+COPY /src /app
+WORKDIR /app
+RUN apk update \
+		&& apk add ca-certificates \
+		&& go build -o hello-world.go \
+		&& rm -rf /var/cache/apk/*
+        
+ENTRYPOINT [ "/go/bin/hello-world" ]

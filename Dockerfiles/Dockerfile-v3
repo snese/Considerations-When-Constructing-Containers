@@ -1,0 +1,14 @@
+FROM python:3.8.0-alpine3.10
+
+RUN apk -U upgrade \
+		&& apk add tzdata \
+		&& cp /usr/share/zoneinfo/Australia/Sydney /etc/localtime \
+		&& echo "Australia/Sydney" > /etc/timezone
+ENV FLASK_APP=minitwit
+COPY /src /app
+WORKDIR /app
+RUN pip install --editable . \
+		&& flask initdb
+EXPOSE 5000
+
+CMD [ "flask", "run", "--host=0.0.0.0" ]

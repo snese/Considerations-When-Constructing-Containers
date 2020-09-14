@@ -1,0 +1,17 @@
+FROM alpine:3.10
+
+ENV FLASK_APP=minitwitCOPY /src /app
+WORKDIR /app
+RUN apk --no-cache add tzdata python3 \
+		&& cp /usr/share/zoneinfo/Australia/Sydney /etc/localtime \
+		&& echo "Australia/Sydney" > /etc/timezone \
+		&& python3 -m ensurepip \
+		&& pip3 install --upgrade pip setuptools \
+		&& pip3 install --no-cache-dir --editable . \
+		&& flask initdb \
+		&& rm -r /root/.cache \
+		&& rm -rvf /var/cache/apk/* \
+		&& find /usr/ -name *.pyc -exec rm -vf {} \;
+EXPOSE 5000
+
+CMD [ "flask", "run", "--host=0.0.0.0" ]

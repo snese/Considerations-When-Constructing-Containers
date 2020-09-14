@@ -1,0 +1,15 @@
+FROM golang:alpine AS build-container
+
+COPY /src /app
+WORKDIR /app
+RUN apk update \
+		&& apk add ca-certificates \
+		&& go build -o hello-world.go \
+		&& rm -rf /var/cache/apk/*
+
+FROM scratch
+
+COPY --from=build-container /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=build-container /app/hello-world.go /go/bin/hello-world
+
+ENTRYPOINT [ "/go/bin/hello-world" ]
