@@ -83,10 +83,3 @@ Ref: [Image scanning](https://docs.aws.amazon.com/AmazonECR/latest/userguide/ima
       - Automate security in the CI/CD pipeline
       - Validate and scan code for vulnerabilities
 </details>
-
-## Summary
-
-Small is beautiful - Faster builds and deploys
-
-Small attack surface - Improved security
-
